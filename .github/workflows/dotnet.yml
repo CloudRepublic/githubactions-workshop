@@ -15,7 +15,7 @@ jobs:
       config: Release
     defaults:
       run:
-        working-directory: /src/${{env.project}}
+        working-directory: ./src/${{env.project}}
 
     steps:
     - uses: actions/checkout@v3
