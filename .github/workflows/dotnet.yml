@@ -38,7 +38,7 @@ jobs:
         
     - name: Publish
       run: |
-        ls -R output
+        ls -R
         
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
