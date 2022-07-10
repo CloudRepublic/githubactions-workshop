@@ -35,7 +35,7 @@ jobs:
     - name: Test
       working-directory: ${{env.WORKDIR}}.UnitTests
       run: |
-        dotnet test --configuration $config
+        dotnet test --configuration $CONFIG
         
 #     - name: Publish
 #       run: |
