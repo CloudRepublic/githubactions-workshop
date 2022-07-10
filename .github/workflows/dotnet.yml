@@ -14,7 +14,7 @@ jobs:
       project: HelloWorld
       config: Release
       AZURE_FUNCTIONAPP_NAME: HelloWorld-Marco
-      AZURE_FUNCTIONAPP_PACKAGE_PATH: ./src/${{env.project}}
+      AZURE_FUNCTIONAPP_PACKAGE_PATH: ./src/HelloWorld
     defaults:
       run:
         working-directory: ./src/${{env.project}}
