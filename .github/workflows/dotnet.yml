@@ -44,7 +44,7 @@ jobs:
     - name: Test
       working-directory: src/${{env.project}}.UnitTests
       run: |
-        dotnet test HelloWorld.UnitTests.csproj --configuration $config --logger:"liquid.md;LogFileName=${{github.workspace}}/${{env.file_name}};Title=${{env.title}};"
+        dotnet test HelloWorld.UnitTests.csproj --configuration $config
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
