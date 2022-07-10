@@ -1,6 +1,7 @@
 name: .NET
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
@@ -36,10 +37,6 @@ jobs:
       working-directory: ${{env.WORKDIR}}.UnitTests
       run: |
         dotnet test --configuration $CONFIG
-        
-#     - name: Publish
-#       run: |
-#         ls -R
         
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
