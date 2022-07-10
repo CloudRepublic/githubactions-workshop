@@ -15,7 +15,7 @@ jobs:
       config: Release
     defaults:
       run:
-        working-directory: /src/${{env.project}}
+        working-directory: ./src/${{env.project}}
 
     steps:
 #     - uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
 #             fi
             
     - name: Test
-      working-directory: /src/${{env.project}}.UnitTests
+      working-directory: ./src/${{env.project}}.UnitTests
       run: ls ${{env.project}}.UnitTests
 #       run: dotnet test --no-restore --no-build --configuration $config --logger:"liquid.md;LogFileName=${{github.workspace}}/${{env.file_name}};Title=${{env.title}};"
       
