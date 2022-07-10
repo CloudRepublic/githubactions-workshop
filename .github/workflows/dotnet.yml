@@ -42,7 +42,7 @@ jobs:
 #             fi
             
     - name: Test
-      working-directory: .src/${{env.project}}.UnitTests
+      working-directory: src/${{env.project}}.UnitTests
       run: |
         ls -R
 #       run: dotnet test --no-restore --no-build --configuration $config --logger:"liquid.md;LogFileName=${{github.workspace}}/${{env.file_name}};Title=${{env.title}};"
