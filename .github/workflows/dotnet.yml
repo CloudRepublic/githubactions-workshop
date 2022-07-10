@@ -15,7 +15,6 @@ jobs:
       WORKDIR: ./src/HelloWorld
       CONFIG: Release
       AZURE_FUNCTIONAPP_NAME: HelloWorld-Marco
-      AZURE_FUNCTIONAPP_PACKAGE_PATH: ./src/HelloWorld
     defaults:
       run:
         working-directory: ${{env.WORKDIR}}
