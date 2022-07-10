@@ -11,13 +11,13 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      project: HelloWorld
-      config: Release
+      WORKDIR: ./src/HelloWorld
+      CONFIG: Release
       AZURE_FUNCTIONAPP_NAME: HelloWorld-Marco
       AZURE_FUNCTIONAPP_PACKAGE_PATH: ./src/HelloWorld
     defaults:
       run:
-        working-directory: ./src/${{env.project}}
+        working-directory: ${{env.WORKDIR}}
 
     steps:
     - uses: actions/checkout@v3
@@ -33,19 +33,18 @@ jobs:
       run: dotnet build --no-restore --output ./output
             
     - name: Test
-      working-directory: src/${{env.project}}.UnitTests
+      working-directory: ${{env.WORKDIR}}.UnitTests
       run: |
-        dotnet test HelloWorld.UnitTests.csproj --configuration $config
+        dotnet test --configuration $config
         
-    - name: Publish
-      run: |
-        ls -R
+#     - name: Publish
+#       run: |
+#         ls -R
         
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
       with:
-        working-directory: ./src/${{env.project}}
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: 'output'
+        package: ${{env.WORKDIR}}
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
