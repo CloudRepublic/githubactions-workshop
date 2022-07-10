@@ -13,6 +13,8 @@ jobs:
     env:
       project: HelloWorld
       config: Release
+      AZURE_FUNCTIONAPP_NAME: HelloWorld-Marco
+      AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' 
     defaults:
       run:
         working-directory: ./src/${{env.project}}
@@ -28,7 +30,7 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --output ./output
             
     - name: Test
       working-directory: src/${{env.project}}.UnitTests
@@ -37,6 +39,12 @@ jobs:
         
     - name: Publish
       run: |
-        dotnet publish -c Release -o out
-        ls -R out
+        ls -R output
+        
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
