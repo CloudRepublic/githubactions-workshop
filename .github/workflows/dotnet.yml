@@ -1,0 +1,42 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      project: HelloWorld
+      config: Release
+    defaults:
+      run:
+        working-directory: ./src/${{env.project}}
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+            
+    - name: Test
+      working-directory: src/${{env.project}}.UnitTests
+      run: |
+        dotnet test HelloWorld.UnitTests.csproj --configuration $config
+        
+    - name: Publish
+      run: |
+        dotnet publish -c Release -o out
+        ls -R out
+
