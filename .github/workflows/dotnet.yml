@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       project: HelloWorld
+      config: Release
     defaults:
       run:
         working-directory: ./src/${{env.project}}
