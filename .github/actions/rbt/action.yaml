@@ -12,13 +12,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-
- - name: Restore dependencies
-    run: dotnet restore
-
+  - name: Restore dependencies
+      run: dotnet restore
   - name: Build
     run: dotnet build --no-restore --output ./output
-
   - name: Test
     working-directory: ${{ inputs.working-directory }}.UnitTests
     run: |
