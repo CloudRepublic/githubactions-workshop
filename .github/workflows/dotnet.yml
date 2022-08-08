@@ -26,22 +26,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
     
-    - name: Build and push image
+    - name: Build and Test a project
       uses: CloudRepublic/githubactions-workshop/.github/actions/rbt@main
       with:
         working-directory: ${{env.WORKDIR}}
         config: ${{env.CONFIG}}
-    
-#     - name: Restore dependencies
-#       run: dotnet restore
-      
-#     - name: Build
-#       run: dotnet build --no-restore --output ./output
-            
-#     - name: Test
-#       working-directory: ${{env.WORKDIR}}.UnitTests
-#       run: |
-#         dotnet test --configuration $CONFIG
         
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
