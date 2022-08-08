@@ -13,7 +13,7 @@ runs:
   using: "composite"
   steps:
   - name: Restore dependencies
-      run: dotnet restore
+    run: dotnet restore
   - name: Build
     run: dotnet build --no-restore --output ./output
   - name: Test
