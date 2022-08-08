@@ -25,17 +25,23 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
-        
-    - name: Restore dependencies
-      run: dotnet restore
+    
+    - name: Build and push image
+      uses: CloudRepublic/githubactions-workshop/.github/actions/rbt@master
+      with:
+        working-directory: ${{env.WORKDIR}}
+        config: ${{env.CONFIG}}
+    
+#     - name: Restore dependencies
+#       run: dotnet restore
       
-    - name: Build
-      run: dotnet build --no-restore --output ./output
+#     - name: Build
+#       run: dotnet build --no-restore --output ./output
             
-    - name: Test
-      working-directory: ${{env.WORKDIR}}.UnitTests
-      run: |
-        dotnet test --configuration $CONFIG
+#     - name: Test
+#       working-directory: ${{env.WORKDIR}}.UnitTests
+#       run: |
+#         dotnet test --configuration $CONFIG
         
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
