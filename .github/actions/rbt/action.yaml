@@ -14,9 +14,12 @@ runs:
   steps:
   - name: Restore dependencies
     run: dotnet restore
+    shell: bash
   - name: Build
     run: dotnet build --no-restore --output ./output
+    shell: bash
   - name: Test
     working-directory: ${{ inputs.working-directory }}.UnitTests
     run: |
       dotnet test --configuration ${{ inputs.config }}
+    shell: bash
