@@ -27,7 +27,7 @@ jobs:
         dotnet-version: 6.0.x
     
     - name: Build and push image
-      uses: CloudRepublic/githubactions-workshop/.github/actions/rbt@master
+      uses: CloudRepublic/githubactions-workshop/.github/actions/rbt@main
       with:
         working-directory: ${{env.WORKDIR}}
         config: ${{env.CONFIG}}
