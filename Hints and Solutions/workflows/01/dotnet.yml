@@ -1,0 +1,42 @@
+name: .NET
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      WORKDIR: ./src/HelloWorld
+      CONFIG: Release
+      AZURE_FUNCTIONAPP_NAME: HelloWorld-Marco
+    defaults:
+      run:
+        working-directory: ${{env.WORKDIR}}
+
+    steps:
+    - name: "Checkout"
+      uses:
+    - name: Setup .NET
+      uses:
+      with:
+        dotnet-version:
+
+    - name: Build and Test a project
+      uses:
+      with:
+        working-directory:
+        config:
+
+    - name: 'Run Azure Functions Action'
+      uses:
+      with:
+        app-name:
+        package:
+        publish-profile:
+

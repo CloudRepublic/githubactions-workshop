@@ -1,41 +1,28 @@
 name: .NET
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+ # Configureer triggers voor een push op de main branch
+ # Configureer triggers voor een pull request
+ # Configureer een trigger voor een handmatige build
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
     env:
-      WORKDIR: ./src/HelloWorld
-      CONFIG: Release
-      AZURE_FUNCTIONAPP_NAME: HelloWorld-Marco
+      WORKDIR: "TODO"
+      CONFIG: "TODO"
+      AZURE_FUNCTIONAPP_NAME: "TODO"
     defaults:
       run:
         working-directory: ${{env.WORKDIR}}
 
     steps:
-    - uses: actions/checkout@v3
+    - name: "Checkout"
+
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    
+
     - name: Build and Test a project
-      uses: CloudRepublic/githubactions-workshop/.github/actions/rbt@main
-      with:
-        working-directory: ${{env.WORKDIR}}
-        config: ${{env.CONFIG}}
-        
+
     - name: 'Run Azure Functions Action'
-      uses: Azure/functions-action@v1
-      with:
-        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: ${{env.WORKDIR}}
-        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
