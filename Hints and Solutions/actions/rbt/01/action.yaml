@@ -1,0 +1,28 @@
+name: 'Restore Build and Test'
+description: 'Restore build and test a project'
+inputs:
+  working-directory:
+    description: 'The working directory'
+    required: true
+
+  config:
+    description: 'the confiuration'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - name: Restore dependencies
+    run:
+    shell:
+    working-directory:
+
+  - name: Build
+    run:
+    shell:
+    working-directory:
+
+  - name: Test
+    working-directory:
+    run:
+    shell:
