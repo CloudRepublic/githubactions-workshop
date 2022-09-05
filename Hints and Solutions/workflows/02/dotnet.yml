@@ -25,17 +25,17 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
-    
+
     - name: Build and Test a project
       uses: CloudRepublic/githubactions-workshop/.github/actions/rbt@main
       with:
         working-directory: ${{env.WORKDIR}}
         config: ${{env.CONFIG}}
-        
+
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: ${{env.WORKDIR}}
+        package: ${{env.WORKDIR}}/bin/Release/net6.0/publish/
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
