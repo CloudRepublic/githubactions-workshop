@@ -27,6 +27,10 @@ jobs:
         with:
           dotnet-version:
 
+      - name: Restore dependencies
+        run:
+        shell: bash
+
       - name: Build
         run:
         shell: bash

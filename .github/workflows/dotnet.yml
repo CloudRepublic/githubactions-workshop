@@ -3,12 +3,13 @@ name: .NET
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
     env:
       WORKDIR: ./src/HelloWorld
@@ -19,34 +20,22 @@ jobs:
         working-directory: ${{env.WORKDIR}}
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 6.0.x
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
 
-      - name: Restore dependencies
-        run: dotnet restore
-        shell: bash
+    - name: Build and Test a project
+      uses: CloudRepublic/githubactions-workshop/.github/actions/rbt@main
+      with:
+        working-directory: ${{env.WORKDIR}}
+        config: ${{env.CONFIG}}
 
-      - name: Build
-        run: dotnet build --no-restore --output ./output
-        shell: bash
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      with:
+        app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+        package: ${{env.WORKDIR}}/bin/Release/net6.0/publish/
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
-      - name: Test
-        working-directory: ${{ env.WORKDIR }}.UnitTests
-        run: |
-          dotnet test --configuration ${{ env.CONFIG }}
-        shell: bash
-
-      - name: Publish
-        run: |
-          dotnet publish -c ${{ env.CONFIG }}
-        shell: bash
-
-      - name: "Run Azure Functions Action"
-        uses: Azure/functions-action@v1
-        with:
-          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          package: ${{env.WORKDIR}}/bin/Release/net6.0/publish/
-          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
