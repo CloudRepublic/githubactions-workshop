@@ -1,0 +1,28 @@
+name: .NET
+
+on:
+ # Configureer triggers voor een push op de main branch
+ # Configureer triggers voor een pull request
+ # Configureer een trigger voor een handmatige build
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      WORKDIR: "TODO"
+      CONFIG: "TODO"
+      AZURE_FUNCTIONAPP_NAME: "TODO"
+    defaults:
+      run:
+        working-directory: ${{env.WORKDIR}}
+
+    steps:
+    - name: "Checkout"
+
+    - name: Setup .NET
+
+    - name: Build and Test a project
+
+    - name: 'Run Azure Functions Action'
+
